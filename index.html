@@ -6,130 +6,278 @@
     <title>Code Your Own Adventures: Python for Kids!</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800;900&family=Balsamiq+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light blue-gray background */
+            background-color: #f0f8ff; /* Alice Blue - very light, clean background */
+            background-image: url('https://placehold.co/1920x1080/e6f7ff/aad3e6?text=Coding+Pattern'); /* Subtle coding pattern background */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
         .ad-container {
-            background: linear-gradient(135deg, #a7e6ff 0%, #d4faff 100%); /* Light blue gradient */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            border: 4px solid #4ade80; /* Green border */
+            background: linear-gradient(135deg, rgba(224, 247, 250, 0.95) 0%, rgba(187, 222, 251, 0.95) 100%); /* Light aqua to light blue gradient with transparency */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25); /* Deeper shadow */
+            border: 6px solid #4CAF50; /* Stronger green border */
+            animation: slideInUp 1s ease-out forwards; /* Slide in animation */
+            overflow: hidden; /* Ensures no overflow from inner shadows/gradients */
+            position: relative; /* For absolute positioning of decorative elements */
+            z-index: 1; /* Ensure content is above background elements */
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .section-header {
-            color: #1e40af; /* Dark blue for headers */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-family: 'Montserrat', sans-serif; /* More impactful font for headers */
+            color: #2c3e50; /* Darker, sophisticated blue-gray */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 10;
+        }
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 6px;
+            background: linear-gradient(90deg, #4CAF50, #81C784); /* Green underline */
+            margin: 10px auto 0;
+            border-radius: 3px;
         }
         .call-to-action {
-            background-color: #4ade80; /* Green button */
+            background: linear-gradient(45deg, #FF7043, #FFAB91); /* Warm orange gradient */
             color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease-in-out;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+            transition: all 0.3s ease-in-out;
+            border: none; /* Remove border for cleaner look */
+            position: relative;
+            overflow: hidden;
         }
         .call-to-action:hover {
-            transform: translateY(-3px);
+            transform: translateY(-7px) scale(1.06);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
         }
+        .call-to-action::before { /* Hover ripple effect */
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: width 0.4s ease-in-out, height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+        .call-to-action:hover::before {
+            width: 200%;
+            height: 200%;
+            opacity: 1;
+        }
+
         .whatsapp-button {
-            background-color: #25d366; /* WhatsApp green */
+            background: linear-gradient(45deg, #4CAF50, #81C784); /* Green gradient */
             color: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease-in-out;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+            transition: all 0.3s ease-in-out;
+            border: none;
+            position: relative;
+            overflow: hidden;
         }
         .whatsapp-button:hover {
-            transform: translateY(-3px);
+            transform: translateY(-7px) scale(1.06);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
         }
+        .whatsapp-button::before { /* Hover ripple effect */
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: width 0.4s ease-in-out, height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+        .whatsapp-button:hover::before {
+            width: 200%;
+            height: 200%;
+            opacity: 1;
+        }
+
         .icon {
             filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.1));
         }
-        /* Basic spinner styling */
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #1e40af;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-            display: none; /* Hidden by default */
+        .fact-output {
+            background-color: #fcf8e3; /* Creamy yellow */
+            border: 3px dashed #FFD700; /* Gold dashed border */
+            color: #5d4037; /* Dark brown text for warmth */
+            font-weight: 600;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-out;
+            min-height: 100px; /* Increased min-height for better appearance */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: 'Balsamiq Sans', cursive; /* Playful font for facts */
+            font-size: 1.25rem; /* Slightly larger text */
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .fact-output:hover {
+            background-color: #fff0b3; /* Lighter yellow on hover */
+            transform: scale(1.02);
+        }
+        .age-badge {
+            background: linear-gradient(45deg, #673AB7, #9575CD); /* Deep purple to lighter purple */
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+            padding: 0.75rem 1.5rem; /* More substantial padding */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+        }
+        .list-item-icon {
+            color: #4CAF50; /* Green for list icons */
+            font-weight: bold;
+            font-size: 1.8rem; /* Slightly larger icons */
+        }
+        .list-item-text strong {
+            color: #3f51b5; /* Deeper blue for strong text in list */
+        }
+        .parent-message {
+            background-color: #e3f2fd; /* Light blue background for parent message */
+            border-left: 6px solid #2196F3; /* Blue left border */
+            padding: 1.5rem;
+            text-align: left;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .parent-message p {
+            color: #37474F; /* Darker gray text */
+        }
+        .parent-message strong {
+            color: #d32f2f; /* Red emphasis */
+        }
+
+        /* Decorative elements */
+        .deco-circle-top-left {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, #ffeb3b 0%, #ffd700 100%); /* Yellow gradient */
+            border-radius: 50%;
+            opacity: 0.6;
+            filter: blur(20px);
+            z-index: 0;
+        }
+        .deco-square-bottom-right {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #9c27b0 0%, #e040fb 100%); /* Purple gradient */
+            transform: rotate(45deg);
+            opacity: 0.5;
+            filter: blur(15px);
+            z-index: 0;
+        }
+        .deco-triangle-top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 80px solid #f44336; /* Red */
+            transform: rotate(15deg);
+            opacity: 0.7;
+            filter: blur(10px);
+            z-index: 0;
         }
     </style>
 </head>
 <body class="flex justify-center items-center min-h-screen p-4">
     <div class="ad-container max-w-4xl w-full mx-auto rounded-3xl p-8 md:p-12 lg:p-16 text-center">
 
+        <!-- Decorative background shapes -->
+        <div class="deco-circle-top-left"></div>
+        <div class="deco-square-bottom-right"></div>
+        <div class="deco-triangle-top-right"></div>
+
         <!-- Header Section -->
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold section-header mb-6 leading-tight">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold section-header mb-8 leading-tight">
             🚀 Code Your Own Adventures! 🚀
         </h1>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
-            <span class="text-indigo-700">💡 Imagine. Build. Play!</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10 leading-snug">
+            <span class="text-blue-800">💡 Imagine. Build. Play!</span>
             <br>
-            <span class="text-purple-700">Why just play games when you can <span class="underline decoration-wavy decoration-yellow-500">CREATE</span> them?</span>
+            <span class="text-purple-800">Why just consume when you can <span class="underline decoration-wavy decoration-yellow-500 decoration-4">CREATE</span>?</span>
         </h2>
 
         <!-- Age Group -->
-        <p class="text-2xl md:text-3xl font-extrabold text-blue-800 mb-10 p-3 bg-white rounded-full inline-block shadow-lg">
-            Ages: <span class="text-red-600">8 - 18</span>
+        <p class="text-2xl md:text-3xl font-extrabold mb-12 p-3 rounded-full inline-block shadow-lg age-badge">
+            Ages: <span class="text-white">8 - 18</span>
         </p>
 
         <!-- What We Offer Section -->
-        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-xl mb-12 text-left">
-            <h3 class="text-3xl md:text-4xl font-bold section-header mb-6 text-center">
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-xl mb-12 text-left relative z-10">
+            <h3 class="text-3xl md:text-4xl font-bold section-header mb-8 text-center">
                 What Your Young Coder Will Discover:
             </h3>
-            <ul class="space-y-4 text-lg md:text-xl text-gray-700">
+            <ul class="space-y-5 text-lg md:text-xl text-gray-700">
                 <li class="flex items-start">
-                    <span class="text-green-500 text-2xl mr-3 icon">✅</span>
-                    <span><strong class="text-blue-600">Super-Friendly Start:</strong> No coding experience needed! We make learning Python fun and easy for everyone.</span>
+                    <span class="list-item-icon mr-3">✅</span>
+                    <span class="list-item-text"><strong class="text-blue-600">Super-Friendly Start:</strong> No coding experience needed! We make learning Python fun and easy for everyone.</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-green-500 text-2xl mr-3 icon">🎮</span>
-                    <span><strong class="text-blue-600">Game-Making Magic:</strong> Dive into exciting mini-projects and build your very own games from scratch!</span>
+                    <span class="list-item-icon mr-3">🎮</span>
+                    <span class="list-item-text"><strong class="text-blue-600">Game-Making Magic:</strong> Dive into exciting mini-projects and build your very own games from scratch!</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-green-500 text-2xl mr-3 icon">🤖</span>
-                    <span><strong class="text-blue-600">Real-World Wonders:</strong> Learn to code interactive stories, control virtual robots, and bring your ideas to life!</span>
+                    <span class="list-item-icon mr-3">🤖</span>
+                    <span class="list-item-text"><strong class="text-blue-600">Real-World Wonders:</strong> Learn to code interactive stories, control virtual robots, and bring your ideas to life!</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-green-500 text-2xl mr-3 icon">🤝</span>
-                    <span><strong class="text-blue-600">Live & Hands-On Fun:</strong> Get personalized guidance and practice with our expert instructors in a lively, interactive setting.</span>
+                    <span class="list-item-icon mr-3">🤝</span>
+                    <span class="list-item-text"><strong class="text-blue-600">Live & Hands-On Fun:</strong> Get personalized guidance and practice with our expert instructors in a lively, interactive setting.</span>
                 </li>
             </ul>
         </div>
 
-        <!-- Gemini API Feature: Code Idea Generator -->
-        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-xl mb-12 text-center">
-            <h3 class="text-3xl md:text-4xl font-bold section-header mb-6">
-                Need a Spark? Get a Code Idea!
+        <!-- Python Fact Generator -->
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-xl mb-12 text-center relative z-10">
+            <h3 class="text-3xl md:text-4xl font-bold section-header mb-8">
+                Fun Python Fact of the Day!
             </h3>
-            <button id="generateIdeaBtn" class="call-to-action inline-flex items-center justify-center px-6 py-3 rounded-full text-xl md:text-2xl font-bold mb-6">
-                ✨ Inspire Me! ✨
+            <button id="generateFactBtn" class="call-to-action inline-flex items-center justify-center px-8 py-4 rounded-full text-xl md:text-2xl font-bold mb-8">
+                🧠 Learn Something Cool! 🧠
             </button>
-            <div id="loadingSpinner" class="spinner mx-auto mb-4"></div>
-            <div id="codeIdeaOutput" class="text-lg md:text-xl text-gray-800 italic min-h-[60px] flex items-center justify-center p-4 border border-dashed border-gray-300 rounded-lg">
-                Your next coding adventure awaits! Click 'Inspire Me!'
+            <div id="pythonFactOutput" class="fact-output text-lg md:text-xl italic p-4 rounded-lg">
+                Click 'Learn Something Cool!' to discover a fun Python fact!
             </div>
         </div>
 
-        <!-- Join Call to Action -->
-        <h3 class="text-4xl md:text-5xl font-extrabold text-indigo-800 mb-6 leading-tight">
+        <!-- Main Call to Action -->
+        <h3 class="text-4xl md:text-5xl font-extrabold text-blue-800 mb-6 leading-tight relative z-10">
             🌟 Join the Code Crew Today! 🌟
         </h3>
-        <p class="text-xl md:text-2xl text-gray-700 mb-8">
-            <strong class="text-green-600">From screen time to creation time – it all starts here!</strong>
+        <p class="text-xl md:text-2xl text-gray-700 mb-8 relative z-10">
+            <strong class="text-green-700">From screen time to creation time – it all starts here!</strong>
         </p>
-        <p class="text-xl md:text-2xl text-gray-700 mb-12">
+        <p class="text-xl md:text-2xl text-gray-700 mb-12 leading-relaxed relative z-10">
             Python coding is more than just learning a language; it's a <strong class="text-red-600">superpower for young minds!</strong> Watch your child transform their amazing ideas into playable games, captivating stories, and innovative projects. It's like playtime, but with a purpose – building valuable skills for the future!
         </p>
 
         <!-- Message to Parents Section -->
-        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-xl mb-12 text-left">
-            <h3 class="text-3xl md:text-4xl font-bold section-header mb-6 text-center">
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-xl mb-12 parent-message relative z-10">
+            <h3 class="text-3xl md:text-4xl font-bold section-header mb-8 text-center">
                 A Special Message to Parents:
             </h3>
             <p class="text-lg md:text-xl text-gray-700 leading-relaxed mb-4">
@@ -141,10 +289,10 @@
         </div>
 
         <!-- Free Class & Contact -->
-        <h3 class="text-4xl md:text-5xl font-extrabold text-pink-700 mb-8">
+        <h3 class="text-4xl md:text-5xl font-extrabold text-pink-700 mb-8 relative z-10">
             🎉 Claim Your FREE Coding Adventure Class! 🎉
         </h3>
-        <a href="https://wa.me/918287113911" target="_blank" class="whatsapp-button inline-flex items-center justify-center px-8 py-4 rounded-full text-2xl md:text-3xl font-bold hover:scale-105 transform transition-transform duration-300">
+        <a href="https://wa.me/918287113911" target="_blank" class="whatsapp-button inline-flex items-center justify-center px-8 py-4 rounded-full text-2xl md:text-3xl font-bold hover:scale-105 transform transition-transform duration-300 relative z-10">
             <svg class="w-8 h-8 md:w-10 md:h-10 mr-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.044 1.36c-6.067 0-10.984 4.917-10.984 10.984 0 1.916.5 3.738 1.45 5.344l-1.55 5.666 5.8-1.52c1.54.84 3.26 1.3 5.284 1.3 6.067 0 10.984-4.917 10.984-10.984S18.11 1.36 12.044 1.36zm4.99 15.01c-.13.23-.79.52-1.09.56-.3.04-.66.06-.98-.15-.32-.21-1.03-.64-1.33-.96-.3-.32-.53-.36-.73-.36-.2 0-.43.07-.66.15-.23.08-.5.18-.76.22-.26.04-.5.06-.73-.08-.23-.15-.98-.36-1.78-1.1-1.3-.9-2.17-2.17-2.43-2.6-.26-.43-.03-.66.19-.88.19-.21.43-.52.64-.73.21-.21.28-.36.4-.6.13-.23.06-.43-.08-.64-.15-.21-.98-2.35-1.33-3.23-.35-.88-.7-.75-1.09-.75-.39 0-.85-.05-1.3-.05-.45 0-.79.13-1.09.43-.3.3-.98.96-.98 2.35 0 1.39 1.01 2.73 1.15 2.92.14.19 1.98 3.03 4.8 4.29 2.82 1.26 3.4 1.01 4.02.96.62-.05 1.63-.67 1.86-1.2.23-.53.23-.98.16-1.09-.07-.11-.26-.17-.5-.28z"/>
             </svg>
@@ -154,45 +302,27 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const generateIdeaBtn = document.getElementById('generateIdeaBtn');
-            const codeIdeaOutput = document.getElementById('codeIdeaOutput');
-            const loadingSpinner = document.getElementById('loadingSpinner');
+            const generateFactBtn = document.getElementById('generateFactBtn');
+            const pythonFactOutput = document.getElementById('pythonFactOutput');
 
-            generateIdeaBtn.addEventListener('click', async () => {
-                codeIdeaOutput.textContent = ''; // Clear previous content
-                loadingSpinner.style.display = 'block'; // Show spinner
+            // Array of fun Python facts for kids
+            const pythonFacts = [
+                "Python was named after the British comedy group Monty Python, not the snake!",
+                "Python is used by big companies like Google, NASA, and Instagram.",
+                "You can use Python to build websites, games, and even control robots!",
+                "Python code is easy to read, almost like reading English.",
+                "The first version of Python was released over 30 years ago, in 1991!",
+                "Python uses 'indentation' (spaces at the beginning of a line) to show how code is organized.",
+                "Many popular games like 'Battlefield 2' and 'The Sims 4' use Python for parts of their development.",
+                "Python has a huge community, so there are lots of resources and help available online.",
+                "You can make cool animations and drawings with Python using libraries like 'Turtle Graphics'.",
+                "Python is a great language to start with if you want to learn more about Artificial Intelligence (AI) and Machine Learning!"
+            ];
 
-                try {
-                    const prompt = "Suggest a simple and fun Python coding project idea for kids aged 7-14, focusing on games or interactive stories. Make it brief, exciting, and include a very short, simple example concept.";
-                    let chatHistory = [];
-                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                    const payload = { contents: chatHistory };
-                    const apiKey = ""; // API key is provided by the environment
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    const result = await response.json();
-
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                        const text = result.candidates[0].content.parts[0].text;
-                        codeIdeaOutput.textContent = text;
-                    } else {
-                        codeIdeaOutput.textContent = 'Oops! Could not generate an idea. Please try again.';
-                        console.error('Gemini API response structure unexpected:', result);
-                    }
-                } catch (error) {
-                    codeIdeaOutput.textContent = 'An error occurred while fetching the idea. Please check your connection.';
-                    console.error('Error calling Gemini API:', error);
-                } finally {
-                    loadingSpinner.style.display = 'none'; // Hide spinner
-                }
+            generateFactBtn.addEventListener('click', () => {
+                // Get a random fact from the array
+                const randomIndex = Math.floor(Math.random() * pythonFacts.length);
+                pythonFactOutput.textContent = pythonFacts[randomIndex];
             });
         });
     </script>
